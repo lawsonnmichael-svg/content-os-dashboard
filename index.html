@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>angela — trend pulse for mike lawson</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #F2EDD0;
+  color: #1C1C1C;
+}
+
+/* ── Top bar ─────────────────── */
+.topbar {
+  background: #1C1C1C;
+  height: 52px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.wordmark {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.wordmark em {
+  color: #B8C9A0;
+  font-style: normal;
+}
+.run-meta {
+  font-size: 11px;
+  color: #555;
+  letter-spacing: 0.3px;
+}
+
+/* ── Hero ─────────────────────── */
+.hero {
+  background: #1C1C1C;
+  padding: 64px 48px 72px;
+  border-bottom: 3px solid #D94040;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #B8C9A0;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.hero-count-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.hero-count {
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1;
+  color: #D94040;
+  letter-spacing: -4px;
+}
+.hero-count-label {
+  font-size: 22px;
+  font-weight: 300;
+  color: #888;
+  letter-spacing: -0.5px;
+}
+.hero-sub {
+  font-size: 13px;
+  color: #555;
+  letter-spacing: 0.5px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.summary-box {
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid #B8C9A0;
+  padding: 20px 24px;
+  max-width: 700px;
+  font-size: 14px;
+  line-height: 2.2;
+  color: #aaa;
+  font-weight: 300;
+}
+.pill {
+  display: inline-block;
+  background: #B8C9A0;
+  color: #1C1C1C;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* ── Grid ─────────────────────── */
+.section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 48px 48px 80px;
+}
+.section-label {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+}
+
+/* ── Card ─────────────────────── */
+.card {
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+.thumb {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+.card-body {
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* card header */
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.creator {
+  font-size: 12px;
+  font-weight: 600;
+  color: #777;
+  flex: 1;
+}
+.signal-chip {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 1.5px solid;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+/* ratio */
+.ratio-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.ratio {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.ratio-label {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 300;
+}
+
+/* title */
+.card-title {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #1C1C1C;
+  font-style: italic;
+  font-weight: 300;
+  border-left: 2px solid #F2EDD0;
+  padding-left: 12px;
+}
+.card-desc {
+  font-size: 12px;
+  color: #999;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* stats */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 11px;
+  color: #bbb;
+}
+.eng-badge {
+  background: #F2EDD0;
+  color: #F5920A;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+/* analysis block */
+.analysis {
+  background: #F2EDD0;
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+.arow { display: flex; flex-direction: column; gap: 4px; }
+.alabel {
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #bbb;
+  font-weight: 700;
+}
+.aval {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #444;
+  font-weight: 300;
+}
+.pillar-val {
+  font-weight: 600;
+  color: #1C1C1C;
+  font-size: 12px;
+}
+
+/* steal row */
+.steal-row {
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 14px;
+  margin-top: 2px;
+}
+.steal-label {
+  color: #D94040;
+  letter-spacing: 1px;
+}
+.steal-text {
+  color: #1C1C1C;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* button */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #1C1C1C;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  align-self: flex-start;
+  margin-top: auto;
+  transition: background 0.15s;
+}
+.btn:hover { background: #D94040; }
+
+/* footer */
+.footer {
+  text-align: center;
+  padding: 28px;
+  font-size: 10px;
+  color: #bbb;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+@media (max-width:600px) {
+  .topbar, .hero, .section { padding-left:20px; padding-right:20px; }
+  .hero-count { font-size:64px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wordmark">Angela <em>·</em> The Scout <em>·</em> Mike Lawson</div>
+  <div class="run-meta">last scan: April 13, 2026 at 01:26 AM</div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">trend pulse &nbsp;·&nbsp; what's breaking out in your lane right now</div>
+  <div class="hero-count-row">
+    <div class="hero-count">21</div>
+    <div class="hero-count-label">outliers found</div>
+  </div>
+  <div class="hero-sub">YouTube · TikTok · Instagram &nbsp;·&nbsp; creators in your exact lane</div>
+  <div class="summary-box"><span class="pill">Brand Strategy & Clarity</span> &nbsp;17 signals<br><span class="pill">Authentic Success (Real > Perfect)</span> &nbsp;2 signals<br><span class="pill">Showing Up & Personal Growth</span> &nbsp;1 signal<br><span class="pill">Creator Journey / Building in Public</span> &nbsp;1 signal</div>
+</div>
+
+<div class="section">
+  <div class="section-label">sorted by outlier strength &nbsp;·&nbsp; highest signal first</div>
+  <div class="grid">
+    
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/oY45iAaPBHA58mByYKk9lAiIAwqvVqUEAECpg~tplv-tiktokx-origin.image?dr=9636&x-expires=1776229200&x-signature=MZPVrVc%2BM7BxJLESkPvYN779kaM%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@thechrisdo</span>
+      <span class="signal-chip" style="color:#F5920A;border-color:#F5920A">VIRAL</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#F5920A">23.7x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"I was drowning in work, unable to scale, and close to burning out.
+The reason?
+
+I wasn’t able to grow my team.
+I was crippled with the hiring/firing p"</p>
+    
+
+    <div class="stats">
+      <span>👁 12.7M plays</span>
+      <span>avg 535.0K</span>
+      <span>❤️ 4.1K</span>
+      <span>💬 35</span>
+      <span>↗ 293 shares</span><span>2026-02-03</span><span class="eng-badge">⚡ 0.03% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Transformation hook — personal before/after. Implies the viewer can change too.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Massive view spike — but engagement is proportional. This went wide, not deep. Great for topic signal, but study the mechanics of why it spread.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@thechrisdo/video/7602424354856537358" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-maliva-p-0068/oUByA3m56FTITE9CIoEDe2fjIsQqQmsKBJnulR~tplv-tiktokx-origin.image?dr=9636&x-expires=1776229200&x-signature=fnGfiAnJik2sFxEaKmAz9gemec8%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@themikelawson</span>
+      <span class="signal-chip" style="color:#D94040;border-color:#D94040">BREAKOUT</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#D94040">12.8x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"you can’t hide and also become good #fyp "</p>
+    
+
+    <div class="stats">
+      <span>👁 37.9K plays</span>
+      <span>avg 3.0K</span>
+      <span>❤️ 2.9K</span>
+      <span>💬 73</span>
+      <span>↗ 204 shares</span><span>2025-10-09</span><span class="eng-badge">⚡ 8.33% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Showing Up & Personal Growth</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Direct address hook — 'you' is the most powerful word in copy. Makes it personal immediately.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">This is a full breakout. High reach AND high engagement — rare combination. The topic hit a nerve and the audience actively responded.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">tiktok: "you can't hide and also grow" — you've already done this one and it's your highest performing post. consider a carousel version of the same idea. same truth, more depth.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@themikelawson/video/7559256089607326988" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/aa4cf981fd78458c8d0ff398cb551a76~tplv-tiktokx-dmt-logom:tos-useast5-i-0068-tx/1d986f6a5967482a9ae10aae143507d4.image?dr=9634&x-expires=1776229200&x-signature=TizTEaPy2h9ZTQcEOlO8rXI9O7Y%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@sahilbloom</span>
+      <span class="signal-chip" style="color:#D94040;border-color:#D94040">BREAKOUT</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#D94040">11.4x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Dont get married until you can do this. #marriage #weddingtiktok #ikeahack #sahilbloom "</p>
+    
+
+    <div class="stats">
+      <span>👁 5.4M plays</span>
+      <span>avg 474.2K</span>
+      <span>❤️ 720.8K</span>
+      <span>💬 3.4K</span>
+      <span>↗ 50.9K shares</span><span>2022-10-29</span><span class="eng-badge">⚡ 14.35% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Direct address hook — 'you' is the most powerful word in copy. Makes it personal immediately.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">This is a full breakout. High reach AND high engagement — rare combination. The topic hit a nerve and the audience actively responded.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@sahilbloom/video/7160063639175843118" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/c0b2adae155240f6a8aa4d19ba0376a0_1693251828~tplv-tiktokx-dmt-logom:tos-useast5-i-0068-tx/os5PmznpIeAjQCC7SADSAeEADAPwbRxZk7OHgt.image?dr=9634&x-expires=1776229200&x-signature=iM14j9Do6ynN6GqQyLmJS%2BRh8M4%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@simonsinek</span>
+      <span class="signal-chip" style="color:#D94040;border-color:#D94040">BREAKOUT</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#D94040">10.3x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"We’re not meant to do it all on our own."</p>
+    
+
+    <div class="stats">
+      <span>👁 16.9M plays</span>
+      <span>avg 1.6M</span>
+      <span>❤️ 1.0M</span>
+      <span>💬 5.9K</span>
+      <span>↗ 169.1K shares</span><span>2023-08-28</span><span class="eng-badge">⚡ 6.95% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">This is a full breakout. High reach AND high engagement — rare combination. The topic hit a nerve and the audience actively responded.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@simonsinek/video/7272461148396490026" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/36f4e0b5f2ef4fb79ec799e9d1a62665~tplv-tiktokx-dmt-logom:tos-useast5-i-0068-tx/07fd1ebdef3540ce96be84dfabae152b.image?dr=9634&x-expires=1776229200&x-signature=2nGGHzOmxmXXHy6lsWVSkQDemtg%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@sahilbloom</span>
+      <span class="signal-chip" style="color:#D94040;border-color:#D94040">BREAKOUT</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#D94040">10.1x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Understanding your partner’s love language is crucial for a healthy, happy relationship.
+
+When your partner comes to you with a problem or dilemma, do"</p>
+    
+
+    <div class="stats">
+      <span>👁 4.8M plays</span>
+      <span>avg 474.2K</span>
+      <span>❤️ 692.2K</span>
+      <span>💬 1.3K</span>
+      <span>↗ 130.1K shares</span><span>2023-05-24</span><span class="eng-badge">⚡ 17.16% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Direct address hook — 'you' is the most powerful word in copy. Makes it personal immediately.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">This is a full breakout. High reach AND high engagement — rare combination. The topic hit a nerve and the audience actively responded.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@sahilbloom/video/7236733795142028587" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oMnIduZEmdRobQyQABFnA7bDA2VeME72fHZEQj~tplv-tiktokx-dmt-logom:tos-useast8-i-0068-tx2/oUE2jADdyBOfeAFekn2WqJyEAVwFEIOmIIAA77.image?dr=9634&x-expires=1776229200&x-signature=xEpYuv1eSbrEusrBBkqMKiH3cQQ%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@simonsinek</span>
+      <span class="signal-chip" style="color:#D94040;border-color:#D94040">BREAKOUT</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#D94040">8.7x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"A quick check-in can change everything. Are you ready to listen? "</p>
+    
+
+    <div class="stats">
+      <span>👁 14.3M plays</span>
+      <span>avg 1.6M</span>
+      <span>❤️ 1.2M</span>
+      <span>💬 5.3K</span>
+      <span>↗ 353.2K shares</span><span>2024-12-19</span><span class="eng-badge">⚡ 10.9% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Direct address hook — 'you' is the most powerful word in copy. Makes it personal immediately.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">This is a full breakout. High reach AND high engagement — rare combination. The topic hit a nerve and the audience actively responded.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@simonsinek/video/7450211242788048158" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/SU3DRpmW5qM/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Codie Sanchez</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">5.8x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Do This Every Time You Get Paid (Paycheck Routine)"</p>
+    <p class="card-desc">Act like an owner and stop doing the work that slows you down. Head to https://Fvrr.co/codiesanchez and let a Fiverr Pro handle it. Use CODIEPRO for 10% off. 
+
+Grab my free Monte Carlo calculator to s</p>
+
+    <div class="stats">
+      <span>👁 420.6K views</span>
+      <span>avg 72.6K</span>
+      <span>❤️ 20.2K</span>
+      <span>💬 1.3K</span>
+      <span>2026-03-30</span><span class="eng-badge">⚡ 5.11% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Direct address hook — 'you' is the most powerful word in copy. Makes it personal immediately.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=SU3DRpmW5qM" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/CQE2E88QJes/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Colin and Samir</span>
+      <span class="signal-chip" style="color:#F5920A;border-color:#F5920A">STRONG OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#F5920A">5.2x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Ryan Trahan reacts to 50 States in 50 Days"</p>
+    <p class="card-desc">Learn about YouTube: http://colinandsamir.com/newsletter
+
+Watch @ryan  's 50 States in 50 Days: https://www.youtube.com/@UCnmGIkw-KdI0W5siakKPKog 
+
+donate here - https://www.stjude.org/50states
+
+Watch</p>
+
+    <div class="stats">
+      <span>👁 770.6K views</span>
+      <span>avg 147.4K</span>
+      <span>❤️ 22.5K</span>
+      <span>💬 1.1K</span>
+      <span>2025-07-13</span><span class="eng-badge">⚡ 3.05% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 5.2x above baseline. Consistent with a topic that has real traction in the niche right now.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=CQE2E88QJes" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/2_klJwgoXrs/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Alex Hormozi</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">4.9x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Build With $3,500 In The Bank"</p>
+    <p class="card-desc">Download your free scaling roadmap here: https://www.acquisition.com/roadmap-yt-d
+The easiest business I can help you start (free trial): https://www.skool.com/hormozi
+Business owners: Want to scale f</p>
+
+    <div class="stats">
+      <span>👁 174.4K views</span>
+      <span>avg 35.6K</span>
+      <span>❤️ 4.0K</span>
+      <span>💬 60</span>
+      <span>2026-04-10</span><span class="eng-badge">⚡ 2.3% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 4.9x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=2_klJwgoXrs" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/d18ud-4epP8/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Colin and Samir</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">4.1x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Why the Biggest YouTube Family Just Went to Netflix: Jordan Matter"</p>
+    <p class="card-desc">Check out Jordan Matter and Salish Matter's channel @jordanmatter 
+
+00:00:16 — Introduction and Big Netflix News 
+00:00:52 — Details of the Unique 3-Year Talent Deal 
+00:01:40 — The Development Proces</p>
+
+    <div class="stats">
+      <span>👁 603.7K views</span>
+      <span>avg 147.4K</span>
+      <span>❤️ 7.6K</span>
+      <span>💬 783</span>
+      <span>2026-02-04</span><span class="eng-badge">⚡ 1.38% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Authentic Success (Real > Perfect)</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Question hook — opens with a gap. Viewer stays to close it.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 4.1x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">substack angle: a personal story where the 'real' version of something worked better than the 'perfect' version. specific. concrete. one moment, not a listicle.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=d18ud-4epP8" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-alisg-p-0037/oQZdBf1tEiJcIUz1qCpgiBn3I0ReAvEKFBZH8C~tplv-tiktokx-origin.image?dr=9636&x-expires=1776229200&x-signature=kFoc2Q%2BSGhbx08x5pkvsJ8D%2Ffzo%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@themikelawson</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">3.9x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"(no caption)"</p>
+    
+
+    <div class="stats">
+      <span>👁 11.5K plays</span>
+      <span>avg 3.0K</span>
+      <span>❤️ 1.7K</span>
+      <span>💬 49</span>
+      <span>↗ 17 shares</span><span>2026-01-26</span><span class="eng-badge">⚡ 14.96% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@themikelawson/video/7599768558570048788" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/XeK4OCBhvwE/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Simon Sinek</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">3.9x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Matthew McConaughey on How to Fall Back in Love with Your Life | A Bit Of Optimism"</p>
+    <p class="card-desc">In a world defined by constant change, reinvention isn’t optional - it’s essential. We often assume reinvention comes from bold leaps or lucky breaks, but actor and author Matthew McConaughey’s story </p>
+
+    <div class="stats">
+      <span>👁 98.3K views</span>
+      <span>avg 25.4K</span>
+      <span>❤️ 1.3K</span>
+      <span>💬 92</span>
+      <span>2026-01-27</span><span class="eng-badge">⚡ 1.42% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Question hook — opens with a gap. Viewer stays to close it.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 3.9x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=XeK4OCBhvwE" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/R3zF6nSO1X4/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Jay Acunzo</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">3.5x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Why buyers would pick YOU, not competitors"</p>
+    <p class="card-desc">When your audience makes choices, they play favorites. The question is: are you one of them? Don't be the best. Be their favorite.</p>
+
+    <div class="stats">
+      <span>👁 913 views</span>
+      <span>avg 261</span>
+      <span>❤️ 21</span>
+      <span>💬 3</span>
+      <span>2025-07-01</span><span class="eng-badge">⚡ 2.63% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Authentic Success (Real > Perfect)</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Question hook — opens with a gap. Viewer stays to close it.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 3.5x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">substack angle: a personal story where the 'real' version of something worked better than the 'perfect' version. specific. concrete. one moment, not a listicle.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=R3zF6nSO1X4" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast8-p-0068-tx2/oE2lwEDNIEBE221ZfEAAQdAFppFwek0bJdtRVM~tplv-tiktokx-dmt-logom:tos-useast8-i-0068-tx2/oYLhlAVDlCmxQQeFEAApwAEDEEuCfwvAmRIEDL.image?dr=9634&x-expires=1776229200&x-signature=p0k%2BV4ID1NZH882iCUIegijf40Q%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast5" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@simonsinek</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">3.5x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"True friends are there for you through the highs and the lows. Christina Tosi is that kind of friend for me. She’s someone I can laugh with, she’s som"</p>
+    
+
+    <div class="stats">
+      <span>👁 5.7M plays</span>
+      <span>avg 1.6M</span>
+      <span>❤️ 576.6K</span>
+      <span>💬 3.0K</span>
+      <span>↗ 141.9K shares</span><span>2024-02-06</span><span class="eng-badge">⚡ 12.66% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Direct address hook — 'you' is the most powerful word in copy. Makes it personal immediately.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@simonsinek/video/7332590531521891615" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-useast5-p-0068-tx/2cbec3f0ae2840df9b972ee2159d48af_1666309170~tplv-tiktokx-dmt-logom:tos-useast5-i-0068-tx/f4cd154e97384462bf82857ab4a0c5ed.image?dr=9634&x-expires=1776229200&x-signature=nbwrwLybTXwXkJiPh73qPZZqnTw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@sahilbloom</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">3.4x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"The best wedding gift I ever received #weddingtiktok #wedding #honeymoonfund #sahilbloom "</p>
+    
+
+    <div class="stats">
+      <span>👁 1.6M plays</span>
+      <span>avg 474.2K</span>
+      <span>❤️ 154.2K</span>
+      <span>💬 196</span>
+      <span>↗ 4.6K shares</span><span>2022-10-20</span><span class="eng-badge">⚡ 9.94% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@sahilbloom/video/7156743195072761130" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/5aBOcIaCcT8/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Simon Sinek</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">3.3x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"When Kindness Means "Go On" | Simon Sinek"</p>
+    <p class="card-desc">Doing nothing may feel safer. But doing something—even imperfectly—is often the kinder choice.
+
+Video from Brilliant Minds 2025, in conversation with comedian, producer, and best-sellling author, Trev</p>
+
+    <div class="stats">
+      <span>👁 84.0K views</span>
+      <span>avg 25.4K</span>
+      <span>❤️ 3.0K</span>
+      <span>💬 119</span>
+      <span>2025-12-24</span><span class="eng-badge">⚡ 3.7% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 3.3x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=5aBOcIaCcT8" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/M9skMLNlre0/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Jay Acunzo</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">3.1x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"How to Start a Speech Strong | Reworking in Realtime: Jay Acunzo Fixes SaaS Influencer's Talk"</p>
+    <p class="card-desc">Webinars are a powerful way to build trust, but let’s be real—the bar is low. Most are a lifeless march of slides and bullet points. But what if you could open with impact? What if you could resonate </p>
+
+    <div class="stats">
+      <span>👁 797 views</span>
+      <span>avg 261</span>
+      <span>❤️ 27</span>
+      <span>💬 14</span>
+      <span>2025-03-19</span><span class="eng-badge">⚡ 5.14% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Creator Journey / Building in Public</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Question hook — opens with a gap. Viewer stays to close it.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">carousel: "what building in public actually taught me" — not about growth hacks. about the moments you almost stopped. that honesty is what your community keeps showing up for.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=M9skMLNlre0" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/xglPbXT4fqI/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Codie Sanchez</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">3.0x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Saving Is Slow. This Is Faster"</p>
+    <p class="card-desc">#codiesanchez #contrarianthinking #creativefinancing #businessbuying #passiveincome #entrepreneurmindset #wealthbuilding #financialfreedom</p>
+
+    <div class="stats">
+      <span>👁 216.6K views</span>
+      <span>avg 72.6K</span>
+      <span>❤️ 11.1K</span>
+      <span>💬 178</span>
+      <span>2026-03-11</span><span class="eng-badge">⚡ 5.19% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=xglPbXT4fqI" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://p16-common-sign.tiktokcdn-us.com/tos-maliva-p-0068/o0LCplitMIBTY6DA9GvofriE0uIlIVigkPHyYA~tplv-tiktokx-origin.image?dr=9636&x-expires=1776229200&x-signature=gRqhWfMtRK7%2BZwuqMA%2FX6Xc5dcw%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=useast8" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#1C1C1C;color:#FFFFFF">TikTok</span>
+      <span class="creator">@themikelawson</span>
+      <span class="signal-chip" style="color:#5a7a42;border-color:#5a7a42">HIGHLY ENGAGING</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#5a7a42">2.9x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"welcome to the new year #branddesign #designer "</p>
+    
+
+    <div class="stats">
+      <span>👁 8.7K plays</span>
+      <span>avg 3.0K</span>
+      <span>❤️ 964</span>
+      <span>💬 93</span>
+      <span>↗ 74 shares</span><span>2026-01-19</span><span class="eng-badge">⚡ 13.0% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Views are elevated but the real signal is the engagement rate. This piece made people feel something enough to act on it. Strong community signal.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://www.tiktok.com/@themikelawson/video/7597115203599256843" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/S15VPnrAYLc/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Alex Hormozi</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">2.9x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"You Don't Need A New Offer, You Need Trust"</p>
+    <p class="card-desc">Download your free scaling roadmap here: https://www.acquisition.com/roadmap-yt-d
+The easiest business I can help you start (free trial): https://www.skool.com/hormozi
+Business owners: Want to scale f</p>
+
+    <div class="stats">
+      <span>👁 102.1K views</span>
+      <span>avg 35.6K</span>
+      <span>❤️ 2.8K</span>
+      <span>💬 42</span>
+      <span>2026-04-09</span><span class="eng-badge">⚡ 2.83% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Contrarian hook — challenges a belief the audience holds. Triggers disagreement or relief — both drive engagement.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 2.9x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=S15VPnrAYLc" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+<div class="card">
+  <img src="https://i.ytimg.com/vi/85MwVmoernY/mqdefault.jpg" alt="" class="thumb">
+  <div class="card-body">
+
+    <div class="card-top">
+      <span class="badge" style="background:#D94040;color:#FFFFFF">YouTube</span>
+      <span class="creator">Colin and Samir</span>
+      <span class="signal-chip" style="color:#B8C9A0;border-color:#B8C9A0">OUTLIER</span>
+    </div>
+
+    <div class="ratio-row">
+      <span class="ratio" style="color:#B8C9A0">2.5x</span>
+      <span class="ratio-label">above their average</span>
+    </div>
+
+    <p class="card-title">"Markiplier Just Proved Hollywood Still Doesn’t Get the Internet"</p>
+    <p class="card-desc">Breaking down the success of Markiplier's indie-horror film "Iron Lung" and what it means for creators and Hollywood.
+
+00:00 The Story of Iron Lung
+05:54 By The Numbers
+07:28 Reason 1 - Self Reliance
+</p>
+
+    <div class="stats">
+      <span>👁 371.3K views</span>
+      <span>avg 147.4K</span>
+      <span>❤️ 10.8K</span>
+      <span>💬 511</span>
+      <span>2026-02-26</span><span class="eng-badge">⚡ 3.04% eng.</span>
+    </div>
+
+    <div class="analysis">
+
+      <div class="arow">
+        <span class="alabel">pillar</span>
+        <span class="aval pillar-val">Brand Strategy & Clarity</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">hook type</span>
+        <span class="aval">Statement hook — declarative, confident. Works when the creator has enough authority that the claim alone pulls people in.</span>
+      </div>
+
+      <div class="arow">
+        <span class="alabel">signal read</span>
+        <span class="aval">Performing 2.5x above average. Worth noting — the topic or format is resonating above the creator's norm.</span>
+      </div>
+
+      <div class="arow steal-row">
+        <span class="alabel steal-label">angela says →</span>
+        <span class="aval steal-text">linkedin post: clarity as a competitive advantage. while everyone's busy optimizing content, the brand that says one true thing clearly will always win. you've built your whole career on this.</span>
+      </div>
+
+    </div>
+
+    <a href="https://youtube.com/watch?v=85MwVmoernY" target="_blank" class="btn">view original →</a>
+
+  </div>
+</div>
+  </div>
+</div>
+
+<div class="footer">
+  angela runs every 48 hours &nbsp;·&nbsp; built for mike lawson &nbsp;·&nbsp; real > perfect
+</div>
+
+</body>
+</html>
